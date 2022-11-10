@@ -1,10 +1,10 @@
 
 DROP TABLE IF EXISTS streaming_service CASCADE;
-DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS movies CASCADE;
 
 CREATE TABLE streaming_service (
   id SERIAL PRIMARY KEY,
-  name text NOT NULL,
+  name text,
   base_price REAL
 );
 
@@ -13,9 +13,11 @@ CREATE TABLE movies (
   title varchar(50) NOT NULL,
   streamer_id INT,
   CONSTRAINT fk_streamer
-  FOREIGN KEY (streamer_id) REFERENCES streaming_service(id) 
+  FOREIGN KEY (streamer_id) REFERENCES streaming_service(id)
   ON DELETE CASCADE
 );
+
+
 
 INSERT INTO streaming_service (name, base_price) 
 VALUES ('Netflix', 6.99),('Disney+', 7.99),('HBOmax', 9.99),
